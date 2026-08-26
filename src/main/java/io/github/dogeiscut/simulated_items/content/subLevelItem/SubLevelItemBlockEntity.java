@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,10 +29,17 @@ public class SubLevelItemBlockEntity extends BlockEntity {
         return itemStack;
     }
 
+
     public void setItemStack(ItemStack itemStack) {
         this.itemStack = itemStack == null ? ItemStack.EMPTY : itemStack;
         setChanged();
         if (level != null && !level.isClientSide) {
+            SubLevelItemShape newShape = (this.itemStack.getItem() instanceof BlockItem)
+                    ? SubLevelItemShape.BLOCK
+                    : SubLevelItemShape.ITEM;
+
+            BlockState currentState = getBlockState();
+            level.setBlock(worldPosition, currentState.setValue(SubLevelItemBlock.SHAPE, newShape), 3);
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     }
@@ -48,9 +56,9 @@ public class SubLevelItemBlockEntity extends BlockEntity {
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         if (tag.contains("Item", CompoundTag.TAG_COMPOUND)) {
-            this.itemStack = ItemStack.parse(registries, tag.getCompound("Item")).orElse(ItemStack.EMPTY);
+            this.setItemStack(ItemStack.parse(registries, tag.getCompound("Item")).orElse(ItemStack.EMPTY));
         } else {
-            this.itemStack = ItemStack.EMPTY;
+            this.setItemStack(ItemStack.EMPTY);
         }
     }
 

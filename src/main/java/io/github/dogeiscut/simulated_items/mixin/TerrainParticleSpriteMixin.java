@@ -1,6 +1,8 @@
 package io.github.dogeiscut.simulated_items.mixin;
 
 import dev.ryanhcode.sable.Sable;
+import dev.ryanhcode.sable.api.sublevel.ClientSubLevelContainer;
+import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.sublevel.ClientSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import io.github.dogeiscut.simulated_items.SSI;
@@ -51,7 +53,6 @@ public abstract class TerrainParticleSpriteMixin extends TextureSheetParticle {
             this.setSprite(model.getParticleIcon());
             cir.setReturnValue((TerrainParticle) (Object) this);
         } catch (Exception e) {
-            SSI.LOGGER.error("Failed to override item sprite for block {} at position {}", state, blockPos, e);
         }
     }
 }
