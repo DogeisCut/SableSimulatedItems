@@ -35,14 +35,13 @@ public abstract class TerrainParticleSpriteMixin extends TextureSheetParticle {
     }
 
     // TODO: fix for sublevels :/
+    // Someone said "okay so i poked it in debugger the updateSprite doesn't even get called for sublevel to ground collision lol"
     @Inject(method = "updateSprite", at = @At("HEAD"), cancellable = true)
     private void ssi$overrideItemSprite(BlockState state, BlockPos blockPos, CallbackInfoReturnable<TerrainParticle> cir) {
         try {
             if (!(state.getBlock() instanceof SubLevelItemBlock)) return;
-            if (this.level == null) return;
 
-            SSI.LOGGER.info("Blockpos {}", blockPos);
-            SSI.LOGGER.info("pos {}", pos);
+            if (blockPos == null) return;
 
             if (!(this.level.getBlockEntity(blockPos) instanceof SubLevelItemBlockEntity be)) return;
 
