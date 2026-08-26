@@ -116,8 +116,8 @@ public class ItemSubLevelEntityWatcher {
         }
     }
 
-    @SubscribeEvent
-    public void onSablePostPhysicsTickEvent(ForgeSablePostPhysicsTickEvent event) {
-
-    }
+//    @SubscribeEvent
+//    public void onSablePostPhysicsTickEvent(ForgeSablePostPhysicsTickEvent event) {
+//      //TODO: apply item velocity
+//    }
 }
