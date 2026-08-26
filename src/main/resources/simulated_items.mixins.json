@@ -4,7 +4,7 @@
   "package": "io.github.dogeiscut.simulated_items.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-
+    "SubLevelEntityCollisionMixin"
   ],
   "client": [
     "TerrainParticleSpriteMixin"
