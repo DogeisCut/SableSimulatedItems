@@ -3,6 +3,7 @@ package io.github.dogeiscut.simulated_items.content.subLevelItem;
 import io.github.dogeiscut.simulated_items.registry.SSIBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -25,6 +26,7 @@ public class SubLevelItemBlock extends Block implements EntityBlock {
 
     // TODO: make per-item/tag configurable via data once the item registry side exists
     private static final VoxelShape SHAPE = Shapes.box(0.3125, 0.3125, 0.3125, 0.6875, 0.6875, 0.6875 );
+    private static final VoxelShape ITEM_SHAPE = Shapes.box(0.3125, 0.3125, 0.4375, 0.6875, 0.6875, 0.5625 );
 
     public SubLevelItemBlock(Properties properties) {
         super(properties);
@@ -60,12 +62,23 @@ public class SubLevelItemBlock extends Block implements EntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        if (level.getBlockEntity(pos) instanceof SubLevelItemBlockEntity be) {
+            if (be.getItemStack().getItem() instanceof BlockItem) {
+                return SHAPE;
+            }
+        }
+        return ITEM_SHAPE;
     }
 
+    // TODO: Sable uses the wrong collision shape for full blocks. No idea how to fix this.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        if (level.getBlockEntity(pos) instanceof SubLevelItemBlockEntity be) {
+            if (be.getItemStack().getItem() instanceof BlockItem) {
+                return SHAPE;
+            }
+        }
+        return ITEM_SHAPE;
     }
 
     @Nullable

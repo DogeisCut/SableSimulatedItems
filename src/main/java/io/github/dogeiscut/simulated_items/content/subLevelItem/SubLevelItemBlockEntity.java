@@ -1,6 +1,7 @@
 package io.github.dogeiscut.simulated_items.content.subLevelItem;
 
 import io.github.dogeiscut.simulated_items.registry.SSIBlockEntities;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -72,5 +73,9 @@ public class SubLevelItemBlockEntity extends BlockEntity {
         if (tag != null) {
             this.loadAdditional(tag, registries);
         }
+    }
+
+    public TextureAtlasSprite getParticleSprite() {
+        return null;
     }
 }
