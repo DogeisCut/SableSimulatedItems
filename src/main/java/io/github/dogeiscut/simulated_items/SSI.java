@@ -31,14 +31,6 @@ public class SSI {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final StackWalker STACK_WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
-
-    private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID)
-            .defaultCreativeTab((ResourceKey<CreativeModeTab>) null)
-            .setTooltipModifierFactory(item ->
-                    new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                            .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
-            );
 
     public SSI(IEventBus modEventBus, ModContainer modContainer) {
         onCtor(modEventBus, modContainer);
@@ -46,17 +38,9 @@ public class SSI {
 
     public static void onCtor(IEventBus modEventBus, ModContainer modContainer) {
         LOGGER.info("{} initializing!", NAME);
-        ModLoadingContext modLoadingContext = ModLoadingContext.get();
 
-        REGISTRATE.registerEventListeners(modEventBus);
-
-        SSIBlocks.register();
-    }
-
-    public static CreateRegistrate registrate() {
-        if (!STACK_WALKER.getCallerClass().getPackageName().startsWith("io.github.dogeiscut"))
-            throw new UnsupportedOperationException("Other mods are not permitted to use Sable: Simulated Items' registrate instance.");
-        return REGISTRATE;
+        SSIBlockEntities.register(modEventBus);
+        SSIBlocks.register(modEventBus);
     }
 
     public static ResourceLocation asResource(String path) {
