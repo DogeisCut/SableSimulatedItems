@@ -46,7 +46,6 @@ public class SubLevelItemRenderer implements BlockEntityRenderer<SubLevelItemBlo
         ms.translate(0.5D, 0.5D, 0.5D);
 
         float scale = isGui3d ? 0.75f : 0.5f;
-        ms.scale(scale, scale, scale);
 
         this.random.setSeed(seed);
 
@@ -63,14 +62,13 @@ public class SubLevelItemRenderer implements BlockEntityRenderer<SubLevelItemBlo
                     float offsetZ = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F;
                     ms.translate(offsetX, offsetY, offsetZ);
                 } else {
-                    //TODO: Don't know why but flat items get the short end of the stick here.
                     float offsetX = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
                     float offsetY = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
 
                     ms.translate(offsetX, offsetY, j * 0.01F);
                 }
             }
-
+            ms.scale(scale, scale, scale);
             itemRenderer.render(itemStack, ItemDisplayContext.FIXED, false, ms, buffer, light, overlay, bakedModel);
 
             ms.popPose();

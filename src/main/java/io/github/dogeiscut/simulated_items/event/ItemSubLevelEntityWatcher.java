@@ -11,25 +11,35 @@ import dev.ryanhcode.sable.neoforge.event.ForgeSablePrePhysicsTickEvent;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
+import io.github.dogeiscut.simulated_items.SSI;
+import io.github.dogeiscut.simulated_items.content.subLevelItem.SubLevelItemBlock;
 import io.github.dogeiscut.simulated_items.content.subLevelItem.SubLevelItemBlockEntity;
 import io.github.dogeiscut.simulated_items.registry.SSIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 public class ItemSubLevelEntityWatcher {
 
+    private final Set<UUID> pendingVelocity = new HashSet<>();
+
     @SubscribeEvent
-    public static void onItemJoin(EntityJoinLevelEvent event) {
+    public void onItemJoin(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide) return;
         if (!(event.getEntity() instanceof ItemEntity itemEntity)) return;
         if (itemEntity.getPersistentData().hasUUID("ssi_sublevel")) return;
@@ -92,14 +102,15 @@ public class ItemSubLevelEntityWatcher {
         }
 
         tag.putUUID("ssi_item", itemEntity.getUUID());
-        // removed once the velocity is applied
+
+        pendingVelocity.add(assembledSubLevel.getUniqueId());
         tag.putDouble("ssi_item_velocity_x", itemEntity.getDeltaMovement().x);
         tag.putDouble("ssi_item_velocity_y", itemEntity.getDeltaMovement().y);
         tag.putDouble("ssi_item_velocity_z", itemEntity.getDeltaMovement().z);
     }
 
     @SubscribeEvent
-    public static void onItemLeave(EntityLeaveLevelEvent event) {
+    public void onItemLeave(EntityLeaveLevelEvent event) {
         if (event.getLevel().isClientSide) return;
         if (!(event.getEntity() instanceof ItemEntity itemEntity)) return;
 
@@ -117,8 +128,39 @@ public class ItemSubLevelEntityWatcher {
         }
     }
 
-//    @SubscribeEvent
-//    public void onSablePostPhysicsTickEvent(ForgeSablePostPhysicsTickEvent event) {
-//      //TODO: apply item velocity
-//    }
+    @SubscribeEvent
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getLevel().getBlockState(event.getPos()).getBlock() instanceof SubLevelItemBlock
+                && event.getItemStack().getItem() instanceof BlockItem) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onSablePrePhysicsTick(ForgeSablePrePhysicsTickEvent event) {
+        if (pendingVelocity.isEmpty()) return;
+        SubLevelPhysicsSystem physicsSystem = event.getPhysicsSystem();
+        ServerSubLevelContainer container = SubLevelContainer.getContainer(physicsSystem.getLevel());
+        if (container == null) return;
+
+        pendingVelocity.removeIf(id -> {
+            if (!(container.getSubLevel(id) instanceof ServerSubLevel subLevel)) return true;
+            CompoundTag tag = subLevel.getUserDataTag();
+            if (tag == null || !tag.contains("ssi_item_velocity_x")) return true;
+
+            RigidBodyHandle handle = physicsSystem.getPhysicsHandle(subLevel);
+            if (handle != null) {
+                Vector3d velocity = new Vector3d(
+                        tag.getDouble("ssi_item_velocity_x"),
+                        tag.getDouble("ssi_item_velocity_y"),
+                        tag.getDouble("ssi_item_velocity_z")).mul(16.0);
+                handle.addLinearAndAngularVelocity(velocity, new Vector3d());
+                SSI.LOGGER.info("Velocity: {}", velocity);
+            }
+            tag.remove("ssi_item_velocity_x");
+            tag.remove("ssi_item_velocity_y");
+            tag.remove("ssi_item_velocity_z");
+            return true;
+        });
+    }
 }

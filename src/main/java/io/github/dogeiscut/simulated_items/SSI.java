@@ -42,7 +42,7 @@ public class SSI {
                 }
         );
 
-        NeoForge.EVENT_BUS.register(ItemSubLevelEntityWatcher.class);
+        NeoForge.EVENT_BUS.register(new ItemSubLevelEntityWatcher());
     }
 
     public static ResourceLocation asResource(String path) {
