@@ -22,6 +22,11 @@
     they control, and only that one. `SubLevelEntityCollisionMixin` currently disables collisions with
     ALL entities (except players, see previous entries) if that sub level owns an item. This is incorrect
     behavior.
+- [ ] Find better solution for physically attaching `ItemEntity`s to sub levels.
+  - Current solution just loops through every sub level and manually teleports and sets the velocity,
+of any `ItemEntity`s that any sub level owns. This looks and acts pretty bad, especially with the
+prediction and the item clipping through its own sub level. Look into sub level entity tracking or
+something.
 is not updated to the new item stack. Leading to the stack to visually look the same.
 - [ ] Add config.
   - Having mod config options would be nice. Currently, the only thing I can think of for config is

@@ -4,11 +4,7 @@ import com.mojang.logging.LogUtils;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.platform.SableEventPlatform;
 import io.github.dogeiscut.simulated_items.config.PhysicsItemPropertiesLoader;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelSpawner;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelRemover;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelVelocityApplier;
-import io.github.dogeiscut.simulated_items.event.SubLevelItemPlacementGuard;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelSubLevelObserver;
+import io.github.dogeiscut.simulated_items.event.*;
 import io.github.dogeiscut.simulated_items.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -48,6 +44,7 @@ public class SSI {
         NeoForge.EVENT_BUS.register(new ItemSubLevelRemover());
         NeoForge.EVENT_BUS.register(new ItemSubLevelVelocityApplier());
         NeoForge.EVENT_BUS.register(new SubLevelItemPlacementGuard());
+        NeoForge.EVENT_BUS.register(new ItemSublevelItemAttacher());
 
         NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) ->
                 event.addListener(new PhysicsItemPropertiesLoader()));
