@@ -35,7 +35,8 @@ public class SubLevelItemBlockEntity extends BlockEntity {
         setChanged();
         if (level != null && !level.isClientSide) {
             // TODO: this isnt a good way to determine if a item should be using block collision, some block items like redstone or levers use 2d item models,
-            // and soemthing like the create mod wrench has the oppisite problem
+            // and soemthing like the create mod wrench has the oppisite problem (althought it actually works pretty well with the wrench, worth adding
+            // data driven config for what items use what collision beyond the automatic detection)
             SubLevelItemShape newShape = (this.itemStack.getItem() instanceof BlockItem)
                     ? SubLevelItemShape.BLOCK
                     : SubLevelItemShape.ITEM;
