@@ -47,15 +47,6 @@ public class ItemSubLevelEntityWatcher {
         if (!(event.getEntity() instanceof ItemEntity itemEntity)) return;
         if (itemEntity.getPersistentData().hasUUID("ssi_sublevel")) return;
 
-        // TODO: So, when spawning a sub level:
-        // Apply random rotation and random angular velocity if the source item's linear velocity isn't (close to) 0
-        // scale the angular velocity by source item linear velocity, the closer it is to 0, the close the angular velocity will be to 0
-
-        // TODO: Hide original item (built in hide entity method doesnt work) and disable its collision
-        // TODO: Attach item to sub level (or at least make it follow it)
-        // TODO: make sub level not collide with player when first thrown out for a bit
-        // TODO: update block when items stack/itemstack changes
-
         final ServerSubLevel assembledSubLevel;
         final BlockState itemBlock = SSIBlocks.SUB_LEVEL_ITEM.get().defaultBlockState();
 

@@ -31,7 +31,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-// TODO: prevent placing blocks off of this block
 // TODO: fix particles with sublevels
 // TODO: tag with very light. or just like, create custom physics config for it
 
