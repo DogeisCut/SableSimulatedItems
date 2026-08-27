@@ -2,14 +2,11 @@ package io.github.dogeiscut.simulated_items;
 
 import com.mojang.logging.LogUtils;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
-import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.platform.SableEventPlatform;
 import io.github.dogeiscut.simulated_items.event.ItemSubLevelEntityWatcher;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelSubLevelWatcher;
+import io.github.dogeiscut.simulated_items.event.ItemSubLevelSubLevelObserver;
 import io.github.dogeiscut.simulated_items.registry.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -38,7 +35,7 @@ public class SSI {
                 (level, container) -> {
                     if (!(container instanceof ServerSubLevelContainer serverContainer)) return;
 
-                    serverContainer.addObserver(new ItemSubLevelSubLevelWatcher());
+                    serverContainer.addObserver(new ItemSubLevelSubLevelObserver());
                 }
         );
 

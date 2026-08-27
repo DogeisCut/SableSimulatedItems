@@ -4,12 +4,11 @@ import dev.ryanhcode.sable.api.sublevel.SubLevelObserver;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 
-public class ItemSubLevelSubLevelWatcher implements SubLevelObserver {
+public class ItemSubLevelSubLevelObserver implements SubLevelObserver {
 
-    public ItemSubLevelSubLevelWatcher() {
+    public ItemSubLevelSubLevelObserver() {
     }
 
     @Override
