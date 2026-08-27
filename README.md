@@ -1,6 +1,6 @@
 # Sable: Simulated Items
 
-Makes dropped items physics simulated through Sable!
+Makes dropped items physics simulated through [Sable](https://github.com/ryanhcode/sable)!
 
 ### How does it work?
 Sable: Simulated Items creates a new block that handles the rendering and collision
