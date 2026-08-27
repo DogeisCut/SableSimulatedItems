@@ -34,7 +34,11 @@ import java.util.UUID;
 
 public class ItemSubLevelEntityWatcher {
 
+    // TODO: maybe split up these events
+
+    // TODO: leaky and is lost on save+quit, find better solution
     private final Set<UUID> pendingVelocity = new HashSet<>();
+
     private static final double EPSILON = 0.02;
 
     @SubscribeEvent
