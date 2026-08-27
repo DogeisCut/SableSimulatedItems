@@ -1,0 +1,7 @@
+{
+  "selector": "#simulated_items:should_use_item_shape_as_block_item",
+  "priority": 0,
+  "properties": {
+    "simulated_items:shape": "item"
+  }
+}

@@ -3,6 +3,7 @@ package io.github.dogeiscut.simulated_items;
 import com.mojang.logging.LogUtils;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.platform.SableEventPlatform;
+import io.github.dogeiscut.simulated_items.config.PhysicsItemPropertiesLoader;
 import io.github.dogeiscut.simulated_items.event.ItemSubLevelSpawner;
 import io.github.dogeiscut.simulated_items.event.ItemSubLevelRemover;
 import io.github.dogeiscut.simulated_items.event.ItemSubLevelVelocityApplier;
@@ -14,6 +15,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import org.slf4j.Logger;
 
 @Mod(SSI.ID)
@@ -46,6 +48,9 @@ public class SSI {
         NeoForge.EVENT_BUS.register(new ItemSubLevelRemover());
         NeoForge.EVENT_BUS.register(new ItemSubLevelVelocityApplier());
         NeoForge.EVENT_BUS.register(new SubLevelItemPlacementGuard());
+
+        NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) ->
+                event.addListener(new PhysicsItemPropertiesLoader()));
     }
 
     public static ResourceLocation asResource(String path) {

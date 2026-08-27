@@ -1,5 +1,6 @@
 package io.github.dogeiscut.simulated_items.content.subLevelItem;
 
+import io.github.dogeiscut.simulated_items.config.PhysicsItemPropertiesLoader;
 import io.github.dogeiscut.simulated_items.registry.SSIBlockEntities;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
@@ -34,12 +35,10 @@ public class SubLevelItemBlockEntity extends BlockEntity {
         this.itemStack = itemStack == null ? ItemStack.EMPTY : itemStack;
         setChanged();
         if (level != null && !level.isClientSide) {
-            // TODO: this isnt a good way to determine if a item should be using block collision, some block items like redstone or levers use 2d item models,
-            // and soemthing like the create mod wrench has the oppisite problem (althought it actually works pretty well with the wrench, worth adding
-            // data driven config for what items use what collision beyond the automatic detection)
-            SubLevelItemShape newShape = (this.itemStack.getItem() instanceof BlockItem)
-                    ? SubLevelItemShape.BLOCK
-                    : SubLevelItemShape.ITEM;
+            SubLevelItemShape newShape = PhysicsItemPropertiesLoader.resolveShape(this.itemStack)
+                    .orElseGet(() -> (this.itemStack.getItem() instanceof BlockItem)
+                            ? SubLevelItemShape.BLOCK
+                            : SubLevelItemShape.ITEM);
 
             BlockState currentState = getBlockState();
             level.setBlock(worldPosition, currentState.setValue(SubLevelItemBlock.SHAPE, newShape), 3);

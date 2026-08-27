@@ -1,0 +1,176 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:doors",
+
+    "minecraft:iron_bars",
+
+    "#c:chains",
+    "#c:glass_panes",
+
+    "#minecraft:candles",
+
+    "minecraft:pointed_dripstone",
+
+    "#c:buds",
+
+    "#minecraft:saplings",
+
+    "#c:mushrooms",
+
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+
+    "minecraft:short_grass",
+    "minecraft:fern",
+
+    "#minecraft:small_flowers",
+    "#minecraft:tall_flowers",
+
+    "minecraft:pink_petals",
+    "minecraft:bamboo",
+    "minecraft:sugar_cane",
+    "minecraft:crimson_roots",
+    "minecraft:warped_roots",
+    "minecraft:nether_sprouts",
+    "minecraft:weeping_vines",
+    "minecraft:twisting_vines",
+    "minecraft:vine",
+    "minecraft:tall_grass",
+    "minecraft:large_fern",
+    "minecraft:glow_lichen",
+    "minecraft:hanging_roots",
+    "minecraft:frogspawn",
+    "minecraft:turtle_egg",
+    "minecraft:sniffer_egg",
+
+    "minecraft:cocoa_beans",
+
+    "#c:seeds",
+
+    "minecraft:pitcher_pod",
+
+    "#c:foods/berry",
+
+    "minecraft:nether_wart",
+    "minecraft:lily_pad",
+    "minecraft:seagrass",
+    "minecraft:sea_pickle",
+    "minecraft:kelp",
+
+    "minecraft:tube_coral",
+    "minecraft:brain_coral",
+    "minecraft:bubble_coral",
+    "minecraft:fire_coral",
+    "minecraft:horn_coral",
+    "minecraft:dead_tube_coral",
+    "minecraft:dead_brain_coral",
+    "minecraft:dead_bubble_coral",
+    "minecraft:dead_fire_coral",
+    "minecraft:dead_horn_coral",
+    "minecraft:tube_coral_fan",
+    "minecraft:brain_coral_fan",
+    "minecraft:bubble_coral_fan",
+    "minecraft:fire_coral_fan",
+    "minecraft:horn_coral_fan",
+    "minecraft:dead_tube_coral_fan",
+    "minecraft:dead_brain_coral_fan",
+    "minecraft:dead_bubble_coral_fan",
+    "minecraft:dead_fire_coral_fan",
+    "minecraft:dead_horn_coral_fan",
+
+    "minecraft:cobweb",
+    "minecraft:torch",
+    "minecraft:soul_torch",
+    "minecraft:redstone_torch",
+    "minecraft:lantern",
+    "minecraft:soul_lantern",
+    "minecraft:campfire",
+    "minecraft:soul_campfire",
+    "minecraft:brewing_stand",
+    "minecraft:cauldron",
+    "minecraft:bell",
+    "minecraft:ladder",
+    "minecraft:flower_pot",
+
+    "#minecraft:signs",
+    "#minecraft:hanging_signs",
+
+    "minecraft:redstone",
+    "minecraft:repeater",
+    "minecraft:comparator",
+    "minecraft:lever",
+    "minecraft:tripwire_hook",
+    "minecraft:string",
+    "minecraft:hopper",
+
+    "#minecraft:rails",
+
+    "#c:foods",
+
+    { "id": "create:andesite_ladder", "required": false },
+    { "id": "create:brass_ladder", "required": false },
+    { "id": "create:copper_ladder", "required": false },
+    { "id": "create:andesite_bars", "required": false },
+    { "id": "create:brass_bars", "required": false },
+    { "id": "create:copper_bars", "required": false },
+
+    { "id": "#farmersdelight:wild_crops", "required": false },
+    { "id": "farmersdelight:rope", "required": false },
+    { "id": "farmersdelight:tree_bark", "required": false },
+    { "id": "farmersdelight:canvas_sign", "required": false },
+
+    { "id": "#botania:mystical_flowers", "required": false },
+    { "id": "#botania:double_mystical_flowers", "required": false },
+    { "id": "#botania:special_flowers", "required": false },
+    { "id": "#botania:mystical_mushrooms", "required": false },
+    { "id": "botania:vine_ball", "required": false },
+
+    { "id": "supplementaries:rope", "required": false },
+    { "id": "supplementaries:flax_seeds", "required": false },
+    { "id": "supplementaries:flax", "required": false },
+    { "id": "supplementaries:item_shelf", "required": false },
+
+    { "id": "biomesoplenty:spanish_moss", "required": false },
+    { "id": "biomesoplenty:willow_vine", "required": false },
+    { "id": "biomesoplenty:watergrass", "required": false },
+    { "id": "biomesoplenty:cattail", "required": false },
+    { "id": "biomesoplenty:barley", "required": false },
+    { "id": "biomesoplenty:reed", "required": false },
+
+    { "id": "thermal:amaranth_seeds", "required": false },
+    { "id": "thermal:barley_seeds", "required": false },
+    { "id": "thermal:flax_seeds", "required": false },
+    { "id": "thermal:saffron_seeds", "required": false },
+    { "id": "thermal:tomato_seeds", "required": false },
+
+    { "id": "computercraft:cable", "required": false },
+    { "id": "computercraft:wired_modem", "required": false },
+    { "id": "computercraft:wireless_modem", "required": false },
+
+    { "id": "quark:rope", "required": false },
+    { "id": "quark:glow_shroom", "required": false },
+    { "id": "quark:chorus_weed", "required": false },
+
+    { "id": "decorative_blocks:rope", "required": false },
+    { "id": "decorative_blocks:chain", "required": false },
+
+    { "id": "architects_palette:twisted_sapling", "required": false },
+    { "id": "architects_palette:entwine_bars", "required": false },
+    { "id": "architects_palette:sunmetal_bars", "required": false },
+
+    { "id": "woodworks:spruce_ladder", "required": false },
+    { "id": "woodworks:birch_ladder", "required": false },
+    { "id": "woodworks:jungle_ladder", "required": false },
+    { "id": "woodworks:acacia_ladder", "required": false },
+    { "id": "woodworks:dark_oak_ladder", "required": false },
+    { "id": "woodworks:mangrove_ladder", "required": false },
+    { "id": "woodworks:cherry_ladder", "required": false },
+    { "id": "woodworks:crimson_ladder", "required": false },
+    { "id": "woodworks:warped_ladder", "required": false }
+  ],
+  "remove": [
+    "minecraft:azalea",
+    "minecraft:flowering_azalea"
+  ]
+}
