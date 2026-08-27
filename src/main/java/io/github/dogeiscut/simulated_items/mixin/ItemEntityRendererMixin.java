@@ -1,6 +1,7 @@
 package io.github.dogeiscut.simulated_items.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import io.github.dogeiscut.simulated_items.client.PickupItemAccess;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -26,7 +27,8 @@ public abstract class ItemEntityRendererMixin {
             int packedLight,
             CallbackInfo ci
     ) {
-        // TODO: continue rendering during pickup animation
-        ci.cancel();
+        if (!((PickupItemAccess) itemEntity).simulated_items$isPickupItem()) {
+            ci.cancel();
+        }
     }
 }

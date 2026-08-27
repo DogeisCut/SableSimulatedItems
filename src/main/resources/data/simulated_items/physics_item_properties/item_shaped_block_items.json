@@ -1,5 +1,5 @@
 {
-  "selector": "#simulated_items:should_use_item_shape_as_block_item",
+  "selector": "#simulated_items:2d_block_items",
   "priority": 0,
   "properties": {
     "simulated_items:shape": "item"

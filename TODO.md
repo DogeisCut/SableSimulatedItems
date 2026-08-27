@@ -11,11 +11,6 @@
     think this isn't a problem, however with a tick perfect drop (dropping an item and leaving on
     the same tick, easier to test with `/tick freeze`), the item's spawned sub level never gets
     its velocity.
-- [ ] Continue rendering items as they are being picked up in `ItemEntityRendererMixin`.
-  - Items normally have a little flying pickup animation. This animation is hidden by our
-    mixin. It's possible this mixin in its entirety is an awful solution for hiding items for
-    `SubLevelItemBlock` to handle, but it was all I could think of.
-  - I genuinely have no idea where this is handled. It's not in `ItemEntity` OR `ItemEntityRenderer`. All I know is that blindly canceling the entire `render` method causes it to stop working.
 - [ ] Disable source entity/player collision for item sub levels when they are first thrown/dropped/spawned.
   - Currently, `SubLevelEntityCollisionMixin` doesn't do this as player movement is
     handled entirely on the client. The sub level's collision would need to be disabled
@@ -51,3 +46,4 @@ in the data driven config too.
 - [X] ~~Tag `simulated_items:sub_level_item` with a custom physics config.~~
 - [X] ~~Update `SubLevelItemBlockEntity` when items merge.~~
 - [X] ~~Data driven `SubLevelItemBlockEntity` collision enum.~~
+- [X] ~~Continue rendering items as they are being picked up in `ItemEntityRendererMixin`.~~

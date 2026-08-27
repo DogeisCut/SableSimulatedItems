@@ -9,6 +9,8 @@
   ],
   "client": [
     "TerrainParticleSpriteMixin",
+    "ItemEntityMixin",
+    "ItemPickupParticleMixin",
     "ItemEntityRendererMixin"
   ],
   "injectors": {
