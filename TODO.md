@@ -33,8 +33,6 @@
     they control, and only that one. `SubLevelEntityCollisionMixin` currently disables collisions with
     ALL entities (except players, see previous entries) if that sub level owns an item. This is incorrect
     behavior.
-- [ ] Update `SubLevelItemBlockEntity` when items merge.
-  - Currently, when two `ItemEntity`s merge into one stack, `SubLevelItemBlockEntity`'s item stack
 is not updated to the new item stack. Leading to the stack to visually look the same.
 - [ ] Add config.
   - Having mod config options would be nice. Currently, the only thing I can think of for config is
@@ -43,3 +41,4 @@ disabling/enabling dropped item stacking/merging.
 ## Completed
 - [X] ~~Split up `ItemSubLevelEntityWatcher` into several classes.~~
 - [X] ~~Tag `simulated_items:sub_level_item` with a custom physics config.~~
+- [X] ~~Update `SubLevelItemBlockEntity` when items merge.~~
