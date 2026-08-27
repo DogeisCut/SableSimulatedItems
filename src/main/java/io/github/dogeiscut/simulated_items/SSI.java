@@ -3,7 +3,10 @@ package io.github.dogeiscut.simulated_items;
 import com.mojang.logging.LogUtils;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.platform.SableEventPlatform;
-import io.github.dogeiscut.simulated_items.event.ItemSubLevelEntityWatcher;
+import io.github.dogeiscut.simulated_items.event.ItemSubLevelSpawner;
+import io.github.dogeiscut.simulated_items.event.ItemSubLevelRemover;
+import io.github.dogeiscut.simulated_items.event.ItemSubLevelVelocityApplier;
+import io.github.dogeiscut.simulated_items.event.SubLevelItemPlacementGuard;
 import io.github.dogeiscut.simulated_items.event.ItemSubLevelSubLevelObserver;
 import io.github.dogeiscut.simulated_items.registry.*;
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +42,10 @@ public class SSI {
                 }
         );
 
-        NeoForge.EVENT_BUS.register(new ItemSubLevelEntityWatcher());
+        NeoForge.EVENT_BUS.register(new ItemSubLevelSpawner());
+        NeoForge.EVENT_BUS.register(new ItemSubLevelRemover());
+        NeoForge.EVENT_BUS.register(new ItemSubLevelVelocityApplier());
+        NeoForge.EVENT_BUS.register(new SubLevelItemPlacementGuard());
     }
 
     public static ResourceLocation asResource(String path) {

@@ -1,0 +1,9 @@
+{
+  "selector": "simulated_items:sub_level_item",
+  "properties": {
+    "sable:mass": 0.15,
+    "sable:volume": 0.3,
+    "sable:restitution": 0.3,
+    "sable:friction": 1.2
+  }
+}

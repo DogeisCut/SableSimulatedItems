@@ -5,7 +5,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public enum SubLevelItemShape implements StringRepresentable {
-    ITEM("item", Shapes.box(0.3125, 0.3125, 0.4375, 0.6875, 0.6875, 0.5625 )),
+    ITEM("item", Shapes.box(0.25, 0.25, 0.46875, 0.75, 0.75, 0.53125 )),
     BLOCK("block", Shapes.box(0.3125, 0.3125, 0.3125, 0.6875, 0.6875, 0.6875 ));
 
     private final String name;
