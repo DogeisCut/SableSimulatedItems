@@ -16,6 +16,7 @@ import io.github.dogeiscut.simulated_items.registry.SSIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ChunkPos;
@@ -34,6 +35,7 @@ import java.util.UUID;
 public class ItemSubLevelEntityWatcher {
 
     private final Set<UUID> pendingVelocity = new HashSet<>();
+    private static final double EPSILON = 0.02;
 
     @SubscribeEvent
     public void onItemJoin(EntityJoinLevelEvent event) {
@@ -140,6 +142,8 @@ public class ItemSubLevelEntityWatcher {
         ServerSubLevelContainer container = SubLevelContainer.getContainer(physicsSystem.getLevel());
         if (container == null) return;
 
+        final ServerLevel level = physicsSystem.getLevel();
+
         pendingVelocity.removeIf(id -> {
             if (!(container.getSubLevel(id) instanceof ServerSubLevel subLevel)) return true;
             CompoundTag tag = subLevel.getUserDataTag();
@@ -147,12 +151,22 @@ public class ItemSubLevelEntityWatcher {
 
             RigidBodyHandle handle = physicsSystem.getPhysicsHandle(subLevel);
             if (handle != null) {
-                Vector3d velocity = new Vector3d(
+                Vector3d linearVelocity = new Vector3d(
                         tag.getDouble("ssi_item_velocity_x"),
                         tag.getDouble("ssi_item_velocity_y"),
                         tag.getDouble("ssi_item_velocity_z")).mul(16.0);
-                handle.addLinearAndAngularVelocity(velocity, new Vector3d());
-                SSI.LOGGER.info("Velocity: {}", velocity);
+
+                double speed = linearVelocity.length();
+                Vector3d angularVelocity = new Vector3d();
+                if (speed > EPSILON) {
+                    angularVelocity.set(
+                            level.random.nextDouble() * 2 - 1,
+                            level.random.nextDouble() * 2 - 1,
+                            level.random.nextDouble() * 2 - 1
+                    ).normalize().mul(speed);
+                }
+
+                handle.addLinearAndAngularVelocity(linearVelocity, angularVelocity);
             }
             tag.remove("ssi_item_velocity_x");
             tag.remove("ssi_item_velocity_y");

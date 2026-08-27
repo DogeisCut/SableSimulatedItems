@@ -26,6 +26,7 @@ public abstract class ItemEntityRendererMixin {
             int packedLight,
             CallbackInfo ci
     ) {
+        // TODO: continue rendering during pickup animation
         ci.cancel();
     }
 }
